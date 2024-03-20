@@ -29,7 +29,7 @@ export function SignUp() {
         api.post("/users", { name,email,password } )
         .then(() => {
             alert("Usuario cadastrado com sucesso")
-            navigate("/")
+            navigate(-1)
         })
         .catch(error=>{
             if(error.response){
@@ -71,7 +71,7 @@ export function SignUp() {
         onChange={e=>setPassword(e.target.value)}
         />
 
-        <Button title="Entrar" onClick={handleSingUp} />
+        <Button title="Cadastrar" onClick={handleSingUp} />
 
         <Link to="/">
             Voltar para Login
