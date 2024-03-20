@@ -8,57 +8,72 @@ import avatarPlacehoalder from '../../assets/avatar_placeholder.svg'
 
 import { api } from '../../services/api';
 
-import { Link } from "react-router-dom";
 
 import {Input} from '../../components/input'
+
 
 import {Button} from '../../components/button'
 
 import { Container,Form,Avatar} from "./style";
 
+import { useNavigate } from 'react-router-dom';
+
 
 export function Profile(){
+    const navigate=useNavigate()
 
     const {user,updateProfile}=useAuth()
-
+    
+    /**declarando campos e sets */
     const [name,setName]=useState(user.name)
     const [email,setEmail]=useState(user.email)
     const [passwordOld,setPasswordOld]=useState()
     const [passwordNew,setPasswordNew]=useState()
 
+    /**foto de perfil padrão */
     const avatarUrl=user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlacehoalder
 
     const [avatar,setAvatar]=useState(avatarUrl)
     const [avatarFile,setAvatarFile]=useState(null)
 
-
+/**atualizando usuario */
    async function handleUpdate(){
-    const user={
+    /**atualizando no back */
+    const updated={
         name,
         email,
         password: passwordNew,
         old_password:passwordOld
-         }
-    await updateProfile({user,avatarFile}) 
+        }
+    
+        const userUpdated=Object.assign(user,updated)
+    /**jogando no auth a informacao do user e o arquivo do avatar */    
+    await updateProfile({user:userUpdated,avatarFile}) 
 
     }
 
     async function handleChangeAvatar(event){
+        /**setando apenas 1 arquivo */
         const file=event.target.files[0]
         setAvatarFile(file)
 
+        /**criando URL do arquivo e atribuindo a preview */
         const imagePreview=URL.createObjectURL(file)
 
+        /**jogando no set do avatar , a preview */
         setAvatar(imagePreview)
 
     }
+    function handleBack(){
+        navigate(-1)
+      }
 
     return(
     <Container>
         <header>
-            <Link to="/">
+            <button type='button' onClick={handleBack}>
             <FiArrowLeft/>
-            </Link>
+            </button>
         </header>
 
         <Form>
