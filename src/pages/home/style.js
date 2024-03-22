@@ -55,18 +55,21 @@ export const Content = styled.div`
   overflow-y:auto;
 
 `
-export const NewNote = styled(Link)`
-  grid-area: newnote;
-  background: ${({ theme }) => theme.COLORS.ORANGE};
-  border: none;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg{
+  export const NewNote = styled(Link)`
+    grid-area: newnote;
+    background: ${({ theme }) => theme.COLORS.ORANGE};
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove sublinhado */
+    color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
     
-    margin-right:8px;
-  }
 
-`
+    svg{
+      
+      margin-right:8px;
+    }
+
+
+  `

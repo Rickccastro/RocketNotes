@@ -52,7 +52,7 @@ export function New() {
   }
 
   function handleBack(){
-    navigate(-1)
+    navigate()
   }
 
   /**função que manda para o backend */
@@ -79,6 +79,7 @@ export function New() {
     });
 
     alert("Nota cadastrada com sucesso!");
+    navigate("/");
   }
 
   return (
@@ -151,7 +152,8 @@ export function New() {
           
         <Button 
         title="Salvar"
-        onClick={handleNewNote}/>
+        onClick={handleNewNote}
+        />
 
       </Form>
     </main>
